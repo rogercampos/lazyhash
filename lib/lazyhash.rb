@@ -1,17 +1,12 @@
 module LazyHash
   class << self
-    def add(hash, key, value, pre = nil)
+    def add(hash, key, value)
       skeys = key.split(".")
       f = skeys.shift
       if skeys.empty?
-        if pre.nil?
-          hash.send("[]=", f, value) unless hash.has_key?(f)
-        else
-          pre.send("[]=", f, value) unless pre.has_key?(f)
-        end
+        hash.send("[]=", f, value) unless !hash.is_a?(Hash) || (hash.has_key?(f) && hash[f].is_a?(Hash))
       else
-        pre = pre.nil? ? hash.send("[]", f) : pre.send("[]", f)
-        add(hash, skeys.join("."), value, pre)
+        add(hash[f], skeys.join("."), value)
       end
     end
 

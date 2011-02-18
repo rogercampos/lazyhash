@@ -28,11 +28,10 @@ describe LazyHash do
     end
 
     it "should not overwrite a node previously defined as a 'value'" do
-      LazyHash.add(@hash, "es.projects", "title")
-      LazyHash.add(@hash, "es.projects.title", "Main title")
+      LazyHash.add(@hash, "es.projects", "Proyectos")
+      LazyHash.add(@hash, "es.projects.title", "try to convert a value into a folder with other values")
 
-      puts @hash.inspect
-      @hash.should == {"es" => {"projects" => "title"}}
+      @hash.should == {"es" => {"projects" => "Proyectos"}}
     end
   end
 
