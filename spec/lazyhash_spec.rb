@@ -5,6 +5,10 @@ describe LazyHash do
     @hash = LazyHash.build_hash
   end
 
+  it "should not be marshable" do
+    lambda { Marshal.dump(@hash) }.should raise_error
+  end
+
   describe ".add" do
     it "should assign consecutive values with different deep's" do
       LazyHash.add(@hash, "es.projects.title", "Main title")
@@ -35,13 +39,21 @@ describe LazyHash do
     end
   end
 
-  describe ".add!" do
-    it "should assign consecutive values with different deep's"
-    it "should raise an error when overwriting a folder"
-    it "should raise an error when overwriting a file"
-  end
-
   describe ".no_lazy" do
-    it "should return a copy of the given Hash without the proc constructor"
+    it "should return a copy of the given hash" do
+      LazyHash.add(@hash, "es.projects", "Proyectos")
+      unlazy = LazyHash.no_lazy(@hash)
+      unlazy.should == {"es" => {"projects" => "Proyectos"}}
+    end
+
+    it "should return a copy of the given hash without the proc constructor" do
+      unlazy = LazyHash.no_lazy(@hash)
+      unlazy.default_proc.should be_nil
+    end
+
+    it "should return a marshable hash" do
+      unlazy = LazyHash.no_lazy(@hash)
+      lambda { Marshal.dump(unlazy) }.should_not raise_error
+    end
   end
 end

@@ -14,5 +14,9 @@ module LazyHash
       lazy = lambda { |h,k| h[k] = Hash.new(&lazy) }
       Hash.new(&lazy)
     end
+
+    def no_lazy(hash)
+      eval(hash.inspect)
+    end
   end
 end
