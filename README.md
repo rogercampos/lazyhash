@@ -1,5 +1,6 @@
 LazyHash
 ========
+[![Build Status](https://secure.travis-ci.org/rogercampos/lazyhash.png)](http://travis-ci.org/rogercampos/lazyhash)
 
 LazyHash is a simple library to work with lazy hash's, giving you the ability
 to create key/value pairs with any deep programatically.
