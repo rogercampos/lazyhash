@@ -5,7 +5,6 @@ require "lazyhash/version"
 Gem::Specification.new do |s|
   s.name        = "lazyhash"
   s.version     = LazyHash::VERSION
-  s.platform    = Gem::Platform::RUBY
   s.authors     = ["Roger Campos"]
   s.email       = ["roger@itnig.net"]
   s.homepage    = "https://github.com/rogercampos/lazyhash"
